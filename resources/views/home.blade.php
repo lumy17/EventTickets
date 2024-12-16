@@ -1,13 +1,15 @@
 @php
-use Illuminate\Support\Facades\URL;
-use App\Http\Controllers\EvenimentController;
+    use Illuminate\Support\Facades\URL;
+    use App\Http\Controllers\EvenimentController;
 @endphp
 
 @extends('layoutcos')
 @section('title', 'Events')
 @section('content')
+
 <head>
-<link href="{{ asset('css/style.css') }}" rel="stylesheet"></head>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+</head>
 @include('layouts.app')
 <div class="container">
     <div class="row justify-content-center">
@@ -34,12 +36,26 @@ use App\Http\Controllers\EvenimentController;
                                             <h4 class="details-h">{{ $eveniment->titlu }}</h4>
                                             <p class="details-h">{{ Str::limit(strtolower($eveniment->descriere), 50) }}</p>
                                             <!-- se afiseaza pretul primului bilet (first ret primul el dintr-o colectie)-->
-                                            <p><strong>Pret: </strong> {{ $eveniment->tickets->first()->pret }}$</p>
+                                            <!--<p><strong>Pret: </strong> { $eveniment->tickets->first()->pret }}$</p>-->
+                                            <p>
+                                                <strong>Pret: </strong>
+                                                @if($eveniment->tickets->isNotEmpty())
+                                                    {{ $eveniment->tickets->first()->pret }}$
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </p>
+
                                             <p class="btn-holder">
-                                                <a href="{{ url('add-tocart/'.$eveniment->id) }}" class="btn btn-warning btn-block text-center" role="button">Pune in cos</a>
-                                                <a href="{{ url('event/'.$eveniment->id.'/sponsors-partners') }}" class="btn btn-info btn-block text-center" role="button">Parteneri & Sponsori</a>
-                                                <a href="{{ url('event/'.$eveniment->id.'/agenda') }}" class="btn btn-primary btn-block text-center" role="button">Agenda</a>
-                                                
+                                                <a href="{{ url('add-tocart/' . $eveniment->id) }}"
+                                                    class="btn btn-warning btn-block text-center" role="button">Pune in
+                                                    cos</a>
+                                                <a href="{{ url('event/' . $eveniment->id . '/sponsors-partners') }}"
+                                                    class="btn btn-info btn-block text-center" role="button">Parteneri &
+                                                    Sponsori</a>
+                                                <a href="{{ url('event/' . $eveniment->id . '/agenda') }}"
+                                                    class="btn btn-primary btn-block text-center" role="button">Agenda</a>
+
                                             </p>
                                         </div>
                                     </div>

@@ -45,7 +45,8 @@ Route::get('add-tocart/{id}', [EvenimentController::class,'addToCart']);//adaug 
 Route::patch('update-cart', [EvenimentController::class,'update']); //modific cos
 Route::delete('remove-from-cart', [EvenimentController::class,'remove']);//sterg din cos
 //se acceseaza metoda update din EvenimentController pentru modificare respective remove pentru ștergere
-Route::get('/stripe-payment', [StripeController::class, 'checkout']);
+Route::get('/stripe-payment', [StripeController::class, 'checkout'])->middleware('auth');;
+
 Route::get('/event/{id}/sponsors-partners', [EvenimentController::class, 'showSponsorsPartners']);
 Route::get('/event/{id}', [SendGridController::class, 'sendInvitations']);
 

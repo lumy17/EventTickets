@@ -39,7 +39,7 @@ Pentru a cumpara bilete va rugam sa accesati pagina: localhost:8000/home\n\n" .
             // Add other details about the event
         );
 
-        $sendgrid = new \SendGrid('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');
+        $sendgrid = new \SendGrid('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');
 
         try {
             $response = $sendgrid->send($email);
